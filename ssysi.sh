@@ -112,19 +112,6 @@ display_top_processes() {
     done
 }
 
-# Function to display a random quote
-display_quote() {
-    local quotes=(
-        "Talk is cheap. Show me the code. - Linus Torvalds"
-        "Free software is software that respects your freedom and the social solidarity of your community. - Richard Stallman"
-        "Given enough eyeballs, all bugs are shallow. - Eric S. Raymond"
-        "The Web as I envisaged it, we have not seen it yet. - Tim Berners-Lee"
-        "Knowledge is power. - Sir Francis Bacon"
-    )
-    local random_index=$((RANDOM % ${#quotes[@]}))
-    center_text "$(color_text "bg_cyan" "Random Quote: ${quotes[$random_index]}")"
-}
-
 # Main function to display all information
 display_info() {
     display_system_info
@@ -133,7 +120,6 @@ display_info() {
     display_disk_usage
     display_battery_info
     display_top_processes
-    display_quote
 }
 
 # Entry point

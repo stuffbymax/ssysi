@@ -1,4 +1,4 @@
-#read me is made by AI
+# read me is made by AI
 # ssysi (Small System Information)
 
 **ssysi** is a simplified, lightweight system information tool. The goal of this project is to provide essential system information in a minimal package, under 10KB, while retaining useful and practical features for everyday system monitoring.

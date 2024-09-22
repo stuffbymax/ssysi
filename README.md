@@ -50,23 +50,5 @@
 
 Running the script will display a concise overview of your system's current state, such as:
 
-```bash
-   Operating System: EndeavourOS
-                          Host: zdislav-asus
-                         Model: ASUSTeK X509MA
-  Logged-in Users  22:27:49 up  5:05,  2 users,  load average: 3.20, 2.13, 1.29
-              USER     TTY       LOGIN@   IDLE   JCPU   PCPU  WHAT
- zdislav            17:24    2.00s  0.00s  0.02s lightdm --session-child 13 20
-zdislav            17:24    2.00s  0.00s  0.51s /usr/lib/systemd/systemd --user
-                           Kernel Name: Linux
-                    Kernel Version: 6.10.8-arch1-1 
-  Kernel Release: #1 SMP PREEMPT_DYNAMIC Wed, 04 Sep 2024 15:16:37 +0000
-                    Resolution: 1920x1080     60.03*
-                     Uptime : up 5 hours, 5 minutes
-                     Memory: 2.5G / 8.1G (30.53%)
-                       Swap: 0B / 9.4G (0.00%)
-             CPU: Intel(R) Celeron(R) N4020 CPU @ 1.10GHz
-                             CPU Cores: 2
-                            CPU Threads: 2
-                      Top Processes by CPU Usage
-```
+
+![screen](https://github.com/stuffbymax/ssysi/blob/main/screenshot/screenshot.jpg)

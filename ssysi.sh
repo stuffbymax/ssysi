@@ -59,7 +59,7 @@ display_memory_usage() {
     local swap_percentage=$(get_percentage "$swap_used" "$swap_total")
 
     center_text "$(color_text "bg_bright_magenta" " Memory: $memory_usage ($memory_percentage)")"
-    center_text "$(color_text "bg_bright_magenta" "Swap: $swap_usage ($swap_percentage)")"
+    center_text "$(color_text "bg_bright_magenta" " Swap: $swap_usage ($swap_percentage)")"
 }
 
 # Function to display system info like kernel uptime and all related stuff to the system outside of hardware
@@ -74,15 +74,15 @@ display_system_info() {
     local uptime=$(uptime -p)
     local screen=$(xrandr | grep -oP '\d+x\d+\s+\d+\.\d+\*')
 
-    center_text "$(color_text "bg_green" " Operating System: $os")"
+    center_text "$(color_text "bg_bright_red" " Operating System: $os")"
     center_text "$(color_text "bg_green" " Host: $hostname")"
-    center_text "$(color_text "bg_green" " Model: $model")"
+    center_text "$(color_text "bg_bright_magenta" " Model: $model")"
     center_text "$(color_text "bg_green" "  Logged-in Users $user")"
-    center_text "$(color_text "bg_green" "  Kernel Name: $kernel_name")"
-    center_text "$(color_text "bg_green" "  Kernel Version: $kernel_ver ")"
-    center_text "$(color_text "bg_green" "  Kernel Release: $kernel_rel")"
-    center_text "$(color_text "bg_black" "  Resolution: $screen")"
-    center_text "$(color_text "bg_white" "  Uptime : $uptime")"
+    center_text "$(color_text "bg_red" "  Kernel Name: $kernel_name")"
+    center_text "$(color_text "bg_bright_black " "  Kernel Version: $kernel_ver ")"
+    center_text "$(color_text "bg_bright_black " "  Kernel Release: $kernel_rel")"
+    center_text "$(color_text "bg_yellow " "  Resolution: $screen")"
+    center_text "$(color_text "bg_magenta" "  Uptime : $uptime")"
 }
 
 # Function to display CPU information
@@ -91,19 +91,19 @@ display_cpu_info() {
     local cpu_cores=$(awk '/^cpu cores/ {print $4; exit}' /proc/cpuinfo)
     local cpu_threads=$(awk '/^processor/ {count++} END {print count}' /proc/cpuinfo)
 
-    center_text "$(color_text "bg_blue" " CPU: $cpu_model")"
-    center_text "$(color_text "bg_blue" " CPU Cores: $cpu_cores")"
-    center_text "$(color_text "bg_blue" " CPU Threads: $cpu_threads")"
+    center_text "$(color_text "bg_cyan" " CPU: $cpu_model")"
+    center_text "$(color_text "bg_cyan" " CPU Cores: $cpu_cores")"
+    center_text "$(color_text "bg_cyan" " CPU Threads: $cpu_threads")"
 }
 
 # Function to display top processes by CPU and Memory usage
 display_top_processes() {
-    center_text "$(color_text "bg_cyan" " Top Processes by CPU Usage")"
+    center_text "$(color_text "bg_blue" " Top Processes by CPU Usage")"
     ps -eo pid,%cpu,%mem,cmd --sort=-%cpu | head -n 11 | while IFS= read -r line; do
         center_text "$line"
     done
 
-    center_text "$(color_text "bg_cyan" " Top Processes by Memory Usage")"
+    center_text "$(color_text "bg_blue" " Top Processes by Memory Usage")"
     ps -eo pid,%cpu,%mem,cmd --sort=-%mem | head -n 11 | while IFS= read -r line; do
         center_text "$line"
     done
@@ -111,12 +111,12 @@ display_top_processes() {
 
 # Function to display top processes by CPU and Memory usage
 display_top_processes() {
-    center_text "$(color_text "bg_cyan" " Top Processes by CPU Usage")"
+    center_text "$(color_text "bg_blue" " Top Processes by CPU Usage")"
     ps -eo pid,%cpu,%mem,cmd --sort=-%cpu | head -n 11 | while IFS= read -r line; do
         center_text "$line"
     done
 
-    center_text "$(color_text "bg_cyan" " Top Processes by Memory Usage")"
+    center_text "$(color_text "bg_blue" " Top Processes by Memory Usage")"
     ps -eo pid,%cpu,%mem,cmd --sort=-%mem | head -n 11 | while IFS= read -r line; do
         center_text "$line"
     done
@@ -124,30 +124,34 @@ display_top_processes() {
 
 # Function to display disk usage and I/O stats and battery
 display_disk_usage() {
-    # Disk usage for root (/)
-    local disk_usage=$(df -h / | awk 'NR==2 {print "(" $5 " used) " $3 "/" $2}')
-    center_text "$(color_text "bg_bright_black" " Disk Usage: $disk_usage")"
 
     # Disk I/O statistics section
-    center_text "$(color_text "bg_yellow" " Disk I/O Statistics")"
+    center_text "$(color_text "bg_bright_black" " Disk I/O Statistics")"
     local io_stats=$(iostat)
     while IFS= read -r line; do
         center_text "$line"
     done <<< "$io_stats"  # Loop through io_stats and display each line
 
+
     # Mounted Drives section
-    center_text "$(color_text "bg_bright_black" "  Mounted Drives")"
-    echo ""  # Add blank line for spacing
-    local header="$(color_text "bg_blue" "      Filesystem                        Size       Used      Use%")"
+    center_text "$(color_text "bg_black" "Mounted Drives")"
+    local header="$(color_text "bg_blue" "Filesystem                        Size       Used      Use%")"
     center_text "$header"
 
     # Display drives information
-    local drives=$(df -h | awk 'NR>1 {printf "      %-30s %-10s %-10s %-10s\n", $1, $2, $3, $5}')
+    local drives=$(df -h | awk 'NR>1 {printf "%-30s %-10s %-10s %-10s\n", $1, $2, $3, $5}')
     while IFS= read -r line; do
-        center_text "$line"
-    done <<< "$drives"  # Loop through drives and display each line
+        center_text "$(color_text "bg_black" "$line")"
+    done <<< "$drives"
 
-    local battery_info=$(upower -i $(upower -e | grep BAT) | grep --color=never -E "state|to full|percentage")
+    
+    # Disk usage for root (/)
+    local disk_usage=$(df -h / | awk 'NR==2 {print "(" $5 " used) " $3 "/" $2}')
+    center_text "$(color_text "bg_bright_black" " Disk Usage: $disk_usage")"
+
+    #battery
+        
+        local battery_info=$(upower -i $(upower -e | grep BAT) | grep --color=never -E "state|to full|percentage")
     center_text "$(color_text "bg_bright_black" " Battery:")"
     while IFS= read -r line; do
         center_text "$line"

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#v 1.1
 # Enable strict error handling
 set -u
 

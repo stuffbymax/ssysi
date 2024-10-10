@@ -1,4 +1,4 @@
-use the colours #!/bin/bash
+#!/bin/bash
 
 # Enable strict error handling
 set -u

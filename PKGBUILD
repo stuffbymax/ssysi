@@ -1,13 +1,13 @@
-# Maintainer: Your Name <your.email@example.com>
+# Maintainer: martin Petik <martinp6282@gmail.com>
 pkgname=ssysi
-pkgver=1.0.0
-pkgrel=1
+pkgver=1.1.3
+pkgrel=3
 pkgdesc="A lightweight system information tool written in Bash"
 arch=('any')
 url="https://github.com/stuffbymax/ssysi"
 license=('MIT')
-depends=('bash')
-source=("https://raw.githubusercontent.com/stuffbymax/ssysi/main/ssysi.sh")
+depends=('bash' 'sysstat' 'upower')
+source=("https://raw.githubusercontent.com/stuffbymax/ssysi/refs/heads/main/ssysi.sh")
 sha256sums=('SKIP')
 
 package() {

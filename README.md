@@ -37,9 +37,6 @@
 5. **Battery Status** (optional):
    - Current charge and state
 
-6. **Top Processes**:
-   - Processes ranked by CPU and memory usage
-
 ## How It Works
 
 - **Color Formatting**: Uses ANSI escape codes for background colors and clear text presentation.

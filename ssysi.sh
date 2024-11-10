@@ -1,7 +1,6 @@
 #!/bin/bash
 # Enable strict error handling
 set -u
-
 # Function to apply color formatting
 color_text() {
 	local color=$1

@@ -1,7 +1,5 @@
 #!/bin/bash
-# Enable strict error handling
 set -euo pipefail
-
 # Constants for color formatting
 RESET="\033[0m"
 declare -A COLORS=(
@@ -88,6 +86,10 @@ display_network_info() {
 	center_text "$(color_text "bg_cyan" "DNS: $dns")"
 }
 
+display_gpu(){
+local gpu_info=$(lspci | grep VGA | cut -d ':' -f 3 | cut -d '[' -f 1,2 | sed 's/^ *//')
+center_text "$(color_text "bg_yellow" "GPU INFO: $gpu_info")"
+}
 # Main function to display all information
 display_info() {
 display_system_info
@@ -97,6 +99,8 @@ display_temperature_info
 display_disk_usage
 display_battery_info
 display_network_info
+display_gpu
+
 }
 
 # Entry point

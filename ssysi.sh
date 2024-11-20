@@ -96,10 +96,10 @@ display_system_info
 display_memory_usage
 display_cpu_info
 display_temperature_info
+display_gpu
 display_disk_usage
 display_battery_info
 display_network_info
-display_gpu
 
 }
 
